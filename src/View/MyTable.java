@@ -24,7 +24,7 @@ public class MyTable extends JPanel{
 	
 	public void newTable() {
 		createHead();
-		if(l != null) {
+		if(l != null && l.size() != 0) {
 			for(int i = 0; i < l.size(); i++) {
 				if((i > numberPage * numberOfRecords - 1) && 
 						(i <= numberPage * numberOfRecords + numberOfRecords - 1)) {

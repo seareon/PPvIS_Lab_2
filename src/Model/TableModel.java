@@ -28,6 +28,10 @@ public class TableModel {
 		return list.size();
 	}
 	
+	public void clear() {
+		list.clear();
+	}
+	
 	public List<Student> searchStudentsNumberFio(String fio, String grup) {
 		List<Student> temp = new ArrayList<>();
 		for(Student s : list) {

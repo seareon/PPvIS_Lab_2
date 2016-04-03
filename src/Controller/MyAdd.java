@@ -32,5 +32,8 @@ public class MyAdd implements ActionListener {
 			 (null, "Can't add student!\nCheck the entered data.", "ERROR", 
 					 JOptionPane.ERROR_MESSAGE|JOptionPane.OK_OPTION);
 		}
+		if(add.getFrame().getTable().getMaxNumberPage() < add.getFrame().getTable().getCurrentPage()) {
+			add.getFrame().getTable().setCurrentPage(add.getFrame().getTable().getMaxNumberPage());
+		}
 	}
 }

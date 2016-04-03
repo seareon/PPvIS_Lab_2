@@ -2,6 +2,7 @@ package View;
 
 import java.awt.BorderLayout;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 import javax.swing.ImageIcon;
@@ -14,8 +15,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JToolBar;
 import Controller.*;
-import Model.Student;
-import Model.TableModel;
+import Model.*;
 
 public class MyFrame extends JFrame {
 	private JMenuBar menuBar = new JMenuBar();
@@ -23,6 +23,8 @@ public class MyFrame extends JFrame {
 	private JPanel jp = new JPanel();
 	private JScrollPane jsp;
 	private TableModel tm = new TableModel();
+	private MyChooserFile mcf = new MyChooserFile();
+	private FileOperations fo = new FileOperations(tm);
 	private MyTable mtable = new MyTable(tm.allStudents());
 	private MyToolBar mtb = new MyToolBar(mtable);
 	
@@ -86,9 +88,25 @@ public class MyFrame extends JFrame {
 		jtb.setFloatable(false);
 		jtb.setRollover(true);
 		
-		jtb.add(makeButton("open.png", null));
+		jtb.add(makeButton("open.png", new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				// TODO Auto-generated method stub
+				String str = mcf.choosFile("Open");
+				fo.openFile(str);
+				mtable.newTable();
+			}
+		}));
 		
-		jtb.add(makeButton("save.png", null));
+		jtb.add(makeButton("save.png", new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				String str = mcf.choosFile("Save");
+				fo.saveFile(str);
+				mtable.newTable();
+			}
+		}));
 		
 		jtb.addSeparator();
 		
@@ -99,7 +117,7 @@ public class MyFrame extends JFrame {
 		jtb.add(makeButton("remove.png", new buttonRemove(this)));
 	}
 	
-	 static JButton makeButton(String str, ActionListener al) {		//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+	 static JButton makeButton(String str, ActionListener al) {		
 	    	JButton but = new JButton();
 	    	String imgLocation = "image\\" + str;
 	    	ImageIcon img = new ImageIcon(imgLocation);
@@ -114,6 +132,10 @@ public class MyFrame extends JFrame {
 	
 	public void setTable(List<Student> newL) {
 		mtable.setList(newL); 
+	}
+	
+	public MyTable getTable() {
+		return mtable;
 	}
 	
 	public static void main(String[] args) {

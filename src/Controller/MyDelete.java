@@ -54,6 +54,9 @@ public class MyDelete implements ActionListener {
 			 (null, "Can't delete student!\nCheck the entered data.", "ERROR", 
 					 JOptionPane.ERROR_MESSAGE|JOptionPane.OK_OPTION);
 		}
+		if(delete.getFrame().getTable().getMaxNumberPage() < delete.getFrame().getTable().getCurrentPage()) {
+			delete.getFrame().getTable().setCurrentPage(delete.getFrame().getTable().getMaxNumberPage());
+		}
 	}
 
 }
