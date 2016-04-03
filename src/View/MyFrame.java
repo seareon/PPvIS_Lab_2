@@ -3,41 +3,46 @@ package View;
 import java.awt.BorderLayout;
 import java.awt.Font;
 import java.awt.event.ActionListener;
+import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
-import javax.swing.JTable;
+import javax.swing.JScrollPane;
 import javax.swing.JToolBar;
+import Controller.*;
+import Model.Student;
+import Model.TableModel;
 
 public class MyFrame extends JFrame {
 	private JMenuBar menuBar = new JMenuBar();
 	private JToolBar jtb = new JToolBar();
-	private JToolBar jtb2 = new JToolBar();
 	private JPanel jp = new JPanel();
-	private MyTable mt;
+	private JScrollPane jsp;
+	private TableModel tm = new TableModel();
+	private MyTable mtable = new MyTable(tm.allStudents());
+	private MyToolBar mtb = new MyToolBar(mtable);
 	
 	MyFrame() {
 		super("Table for student");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setSize(1000, 600);
+		setSize(1100, 700);
 		setLocationRelativeTo(null);
 		
 		createMenuBar();
 		setJMenuBar(menuBar);
 		
 		createToolBar1();
-		createToolBar2();
+		
+		jsp = new JScrollPane(mtable);
 		
 		jp.setLayout(new BorderLayout());
 		jp.add(jtb, BorderLayout.NORTH);
-		jp.add(jtb2, BorderLayout.SOUTH);
-		jp.add(/*mt*/ new JTable(), BorderLayout.CENTER);
-		
+		jp.add(mtb, BorderLayout.SOUTH);
+		jp.add(jsp, BorderLayout.CENTER);
 		add(jp);
 		this.setVisible(true);
 	}
@@ -81,49 +86,38 @@ public class MyFrame extends JFrame {
 		jtb.setFloatable(false);
 		jtb.setRollover(true);
 		
-		jtb.add(makeButton("open.png"));
+		jtb.add(makeButton("open.png", null));
 		
-		jtb.add(makeButton("save.png"));
+		jtb.add(makeButton("save.png", null));
 		
 		jtb.addSeparator();
 		
-		jtb.add(makeButton("search.png"));
+		jtb.add(makeButton("search.png", new buttonSearch(this)));
 		
-		jtb.add(makeButton("add.png"));
+		jtb.add(makeButton("add.png", new buttonAdd(this)));
 		
-		jtb.add(makeButton("remove.png"));
+		jtb.add(makeButton("remove.png", new buttonRemove(this)));
 	}
 	
-	private void createToolBar2() {
-		jtb2.setFloatable(false);
-		jtb2.setRollover(true);
-		Font f = new Font("Helvetica", Font.PLAIN, 14);
-		
-		JLabel jl = new JLabel("Page: 1/1   ");
-		jl.setFont(f);
-		jtb2.add(jl);
-		jl = new JLabel("Total records: 0   ");
-		jl.setFont(f);
-		jtb2.add(jl);
-		
-		jtb2.add(makeButton("arrow-left.png"));
-		jtb2.add(makeButton("previous.png"));
-		jtb2.add(makeButton("next.png"));
-		jtb2.add(makeButton("arrow-right.png"));
-	}
-	
-	 protected JButton makeButton(String str/*, ActionListener al*/) {		//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+	 static JButton makeButton(String str, ActionListener al) {		//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 	    	JButton but = new JButton();
 	    	String imgLocation = "image\\" + str;
 	    	ImageIcon img = new ImageIcon(imgLocation);
 	    	but.setIcon(img);
-//		    but.addActionListener(al); 
+		    but.addActionListener(al); 
 		    return but;
 	    }
+	 
+	public TableModel getTableModel() {
+			return tm;
+		}
+	
+	public void setTable(List<Student> newL) {
+		mtable.setList(newL); 
+	}
 	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		new MyFrame();
 	}
-
 }

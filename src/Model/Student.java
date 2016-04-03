@@ -1,0 +1,43 @@
+package Model;
+
+public class Student {
+	private String fio;
+	private String numberGrup;
+	private int truancyõ[] = {0, 0, 0};
+	
+	Student(String fio, String numberGrup, int sickness, int otherCauses, int withoutGoodReason) {
+		this.fio = fio;
+		this.numberGrup = numberGrup;
+		truancyõ[0] = sickness;
+		truancyõ[1] = otherCauses;
+		truancyõ[2] = withoutGoodReason;
+	}
+	
+/*	Student(String fio, String numberGrup, String sickness, String otherCauses, String withoutGoodReason) {
+		this.fio = fio;
+		this.numberGrup = numberGrup;
+		truancyõ[0] = Integer.parseInt(sickness);
+		truancyõ[1] = Integer.parseInt(otherCauses);
+		truancyõ[2] = Integer.parseInt(withoutGoodReason);
+	}	*/
+	
+	public String getFIO() {
+		return fio;
+	}
+	
+	public String getGrup() {
+		return numberGrup;
+	}
+	
+	public int getNumbertSickness() {
+		return truancyõ[0];
+	}
+	
+	public int getNumberOtherCauses() {
+		return truancyõ[1];
+	}
+	
+	public int getNumberWithoutGoodReason() {
+		return truancyõ[2];
+	}
+}
