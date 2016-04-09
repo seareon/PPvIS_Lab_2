@@ -1,5 +1,6 @@
 package View;
 
+<<<<<<< HEAD
 import java.awt.BorderLayout;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -16,6 +17,11 @@ import javax.swing.JScrollPane;
 import javax.swing.JToolBar;
 import Controller.*;
 import Model.*;
+=======
+import javax.swing.JFrame;
+
+public class MyFrame extends JFrame JFrame implements CheckData {
+>>>>>>> refs/heads/master
 
 public class MyFrame extends JFrame implements CheckData {
 	private JMenuBar menuBar = new JMenuBar();
