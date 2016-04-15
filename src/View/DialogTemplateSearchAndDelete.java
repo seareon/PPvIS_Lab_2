@@ -2,11 +2,12 @@ package View;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+
+import Controller.AddAndSearchAndDelete;
 
 public class DialogTemplateSearchAndDelete extends DialogTemplate {
 	protected final String [] TYPESOFPERMITS = {"------", "По болезни", "По другим причинам", 
@@ -19,7 +20,7 @@ public class DialogTemplateSearchAndDelete extends DialogTemplate {
 	protected final JLabel SICKNESS = new JLabel("  Absences due to illness (min/max): ");
 	protected final JLabel OTHERCAUSES = new JLabel("  Absences for other reasons (min/max): ");
 	protected final JLabel WITHOUTGOODREASON = new JLabel("  Unexcused absence (min/max): ");
-	
+
 	protected JTextField sicknessMin = new JTextField(6);
 	protected JTextField sicknessMax = new JTextField(6);
 	protected JTextField otherCausesMin = new JTextField(6);
@@ -29,8 +30,8 @@ public class DialogTemplateSearchAndDelete extends DialogTemplate {
 	
 	JComboBox jcb = new JComboBox(TYPESOFPERMITS);
 	
-	DialogTemplateSearchAndDelete(String str, MyFrame mf) {
-		super(str, mf);
+	DialogTemplateSearchAndDelete(String str, MyFrame mf, AddAndSearchAndDelete sad) {
+		super(str, mf, sad);
 		jp.add(FIO);
 		jp.add(fio);
 		jp.add(NUMBERGRUP);

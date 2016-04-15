@@ -4,7 +4,6 @@ import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JToolBar;
@@ -87,7 +86,7 @@ public class MyToolBar extends JToolBar{
 		currentRecordsOnPage.addKeyListener(new MyKeyListener(this));
 	}
 	
-	public void setMaxPage(int n) {		// похоже на чушь
+	public void setMaxPage(int n) {		
 		allPage.setText("/ " + n); 
 	}
 	

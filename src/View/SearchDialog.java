@@ -3,10 +3,13 @@ package View;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import Controller.AddAndSearchAndDelete;
 import Model.Student;
 
 
@@ -16,17 +19,24 @@ public class SearchDialog extends DialogTemplateSearchAndDelete {
 	private JButton search;
 	private JScrollPane jsp;
 	
-	public SearchDialog(MyFrame frame) {
-		super("Search person", frame);
+	public SearchDialog(MyFrame frame, AddAndSearchAndDelete sad) {
+		super("Search person", frame, sad);
 		this.frame = frame;
+		sad.setSearchDialog(this); 
 		JPanel mainJP = new JPanel();
 		mainJP.setLayout(new BorderLayout()); 
 		jp.setLayout(new GridLayout(7,2));
-
+		sad.setSearchDialog(this);
 		
 		JPanel jp2 = new JPanel();
 		search = new JButton("search");
-		search.addActionListener(new MySearch(this));
+		search.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				// TODO Auto-generated method stub
+				sad.search();
+			}
+		}); 
 		jp2.add(search);	
 		jp.add(jp2);
 		jp.setMaximumSize(new Dimension(600, 300));

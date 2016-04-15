@@ -1,6 +1,5 @@
 package View;
 
-<<<<<<< HEAD
 import java.awt.BorderLayout;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -17,28 +16,77 @@ import javax.swing.JScrollPane;
 import javax.swing.JToolBar;
 import Controller.*;
 import Model.*;
-=======
-import javax.swing.JFrame;
 
-public class MyFrame extends JFrame JFrame implements CheckData {
->>>>>>> refs/heads/master
-
-public class MyFrame extends JFrame implements CheckData {
+public class MyFrame extends JFrame {
 	private JMenuBar menuBar = new JMenuBar();
 	private JToolBar jtb = new JToolBar();
 	private JPanel jp = new JPanel();
 	private JScrollPane jsp;
 	private StudentsData tm = new StudentsData();
 	private MyChooserFile mcf = new MyChooserFile();
-	private FileOperations fo = new FileOperations(tm);
+	private FileOperations fo = new FileOperations(this);
 	private MyTable mtable = new MyTable(tm.allStudents());
 	private MyToolBar mtb = new MyToolBar(mtable);
+	private AddAndSearchAndDelete sad;
+	
+	private ActionListener add;
+	private ActionListener search;
+	private ActionListener delete;
 	
 	MyFrame() {
 		super("Table for student");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(1100, 700);
 		setLocationRelativeTo(null);
+		
+		sad = new AddAndSearchAndDelete(tm);
+		
+		MyFrame mf = this;
+		
+		add = new ActionListener() {
+			AddDialog m = null;
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				if(m == null) {
+					m = new AddDialog(mf, sad);
+				}
+				else {
+					sad.pressAdd();
+				}
+			}
+		};
+		
+		search = new ActionListener() {
+			SearchDialog m = null;
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				if(m == null) {
+					m = new SearchDialog(mf, sad);
+				}
+				else {
+					sad.pressSearch();
+				}
+			}
+		};
+		
+		delete = new ActionListener() {
+			DeleteDialog m = null;
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				if(m == null) {
+					m = new DeleteDialog(mf, sad);
+				}
+				else {
+					sad.pressRemove();
+				}
+			}
+		};
 		
 		createMenuBar();
 		setJMenuBar(menuBar);
@@ -73,13 +121,13 @@ public class MyFrame extends JFrame implements CheckData {
 		menu.setFont(f);
 		
 		menu_item = new JMenuItem("Search person");
-		setMenuBar(menu, menu_item, f, new ButtonSearch(this));
+		setMenuBar(menu, menu_item, f, search);
 		
 		menu_item = new JMenuItem("Add person");
-		setMenuBar(menu, menu_item, f, new ButtonAdd(this));
+		setMenuBar(menu, menu_item, f, add);
 		
 		menu_item = new JMenuItem("Remove person");
-		setMenuBar(menu, menu_item, f, new ButtonRemove(this));
+		setMenuBar(menu, menu_item, f, delete);
 		
 		menuBar.add(menu);
 	}
@@ -96,12 +144,10 @@ public class MyFrame extends JFrame implements CheckData {
 		
 		jtb.add(makeButton("open.png", new ActionListener() {
 			@Override
-			public void actionPerformed(ActionEvent arg0) {
+			public void actionPerformed(ActionEvent arg0) {		// функционал вынести в контроллер
 				// TODO Auto-generated method stub
 				String str = mcf.choosFile("Open");
 				fo.openFile(str);
-				mtable.newTable();
-				checkTheNumberOfPages(mtb);
 			}
 		}));
 		
@@ -111,17 +157,16 @@ public class MyFrame extends JFrame implements CheckData {
 				// TODO Auto-generated method stub
 				String str = mcf.choosFile("Save");
 				fo.saveFile(str);
-				mtable.newTable();
 			}
 		}));
 		
 		jtb.addSeparator();
 		
-		jtb.add(makeButton("search.png", new ButtonSearch(this)));
+		jtb.add(makeButton("search.png", search));
 		
-		jtb.add(makeButton("add.png", new ButtonAdd(this)));
+		jtb.add(makeButton("add.png", add));
 		
-		jtb.add(makeButton("remove.png", new ButtonRemove(this)));
+		jtb.add(makeButton("remove.png", delete));
 	}
 	
 	 static JButton makeButton(String str, ActionListener al) {		
@@ -147,6 +192,10 @@ public class MyFrame extends JFrame implements CheckData {
 	
 	public MyToolBar getToolBar() {
 		return mtb;
+	}
+	
+	public AddAndSearchAndDelete getController() {
+		return sad;
 	}
 	
 	public static void main(String[] args) {

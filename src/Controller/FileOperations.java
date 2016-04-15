@@ -7,9 +7,8 @@ import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLOutputFactory;
 import javax.xml.stream.XMLStreamReader;
 import javax.xml.stream.XMLStreamWriter;
-
-import Model.Student;
-import Model.StudentsData;
+import Model.*;
+import View.MyFrame;
 
 public class FileOperations {
 	 private static final String FIO = "FIO";
@@ -21,12 +20,14 @@ public class FileOperations {
 	 private static final String STUDENTS = "students";
 	 private static final String FORMAT = "UTF-8";
 	 private static final String VER = "1.0";
+	 private MyFrame mf;
 	 private StudentsData tm;
-	 private SearchAndDelete sad;
+	 private AddAndSearchAndDelete sad;
 	 
-	 public FileOperations(StudentsData tm) {
-		 this.tm = tm;
-		 sad = new SearchAndDelete(tm);
+	 public FileOperations(MyFrame mf) {
+		 this.mf = mf;
+		 this.tm = mf.getStudentsData();
+		 sad = new AddAndSearchAndDelete(tm);
 	 }
 	 
 	 public void saveFile(String path) {
@@ -77,6 +78,8 @@ public class FileOperations {
 					 }
 				 }
 			 }
+			 mf.getTable().newTable();
+			 sad.checkTheNumberOfPages(mf.getToolBar());
 		 } catch(Exception e) {
 			 JOptionPane.showMessageDialog
 				(null, "Can't open file", "ERROR", JOptionPane.ERROR_MESSAGE|JOptionPane.OK_OPTION);

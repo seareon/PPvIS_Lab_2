@@ -3,9 +3,7 @@ package View;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import javax.swing.JTextField;
-
-import Controller.SearchAndDelete;
-import Model.StudentsData;
+import Controller.AddAndSearchAndDelete;
 
 public class MyKeyListener implements KeyListener {
 	private MyToolBar mtb;
@@ -19,14 +17,14 @@ public class MyKeyListener implements KeyListener {
 		// TODO Auto-generated method stub
 		if(arg0.getKeyCode() == KeyEvent.VK_ENTER) {
 			JTextField jtf = mtb.getModifiedPage();
-			if(SearchAndDelete.isInt(jtf.getText()) == 1) {
+			if(AddAndSearchAndDelete.isInt(jtf.getText()) == 1) {
 				mtb.setCurrentPage(Integer.parseInt(jtf.getText())); 
 			}
 			else {
 				mtb.setCurrentPage(1);
 			}
 			jtf = mtb.getModifiedNamberRecords();				
-			if(SearchAndDelete.isInt(jtf.getText()) == 1) {
+			if(AddAndSearchAndDelete.isInt(jtf.getText()) == 1) {
 				mtb.setCurrentNamberRecords(Integer.parseInt(jtf.getText())); 
 				int countPage = mtb.getSizeTable() / mtb.getTableCurrentNamberRecords();
 				if(mtb.getSizeTable() % mtb.getTableCurrentNamberRecords() > 0) {

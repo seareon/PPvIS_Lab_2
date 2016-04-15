@@ -2,16 +2,13 @@ package View;
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
-import java.util.List;
-
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.JButton;
-import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-
-import Model.Student;
-import Model.StudentsData;
+import Controller.AddAndSearchAndDelete;
 
 public class AddDialog extends DialogTemplate {	
 	protected final JLabel SICKNESS = new JLabel("  Пропуски по болезни: ");
@@ -22,8 +19,9 @@ public class AddDialog extends DialogTemplate {
 	protected JTextField otherCauses = new JTextField(6);
 	protected JTextField withoutGoodReason = new JTextField(6);
 	
-	public AddDialog(MyFrame frame) {
-		super("Add person", frame);
+	public AddDialog(MyFrame frame, AddAndSearchAndDelete sad) {
+		super("Add person", frame, sad);
+		sad.setAddDialog(this); 
 		JPanel jp = new JPanel(); 
 		jp.setLayout(new GridLayout(5,2));
 		jp.add(FIO);
@@ -38,8 +36,15 @@ public class AddDialog extends DialogTemplate {
 		jp.add(withoutGoodReason);
 		this.setLayout(new BorderLayout());
 		this.add(jp,BorderLayout.CENTER);
+		sad.setAddDialog(this);
 		JButton add = new JButton("Add");
-		add.addActionListener(new MyAdd(this));
+		add.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				sad.add();
+			}
+		});
 		jp = new JPanel();
 		jp.add(add);
 		this.add(jp, BorderLayout.SOUTH); 
@@ -61,7 +66,7 @@ public class AddDialog extends DialogTemplate {
 		return withoutGoodReason.getText();
 	}
 	
-	public void setSickness(String str) {
+/*	public void setSickness(String str) {
 		sickness.setText(str);
 	}
 	
@@ -71,5 +76,17 @@ public class AddDialog extends DialogTemplate {
 	
 	public void setWithoutGoodReason(String str) {
 		withoutGoodReason.setText(str);
+	}*/
+	
+	public JTextField getTextFieldSickness() {
+		return sickness;
+	}
+	
+	public JTextField getTextFieldOtherCauses() {
+		return otherCauses;
+	}
+	
+	public JTextField getTextFieldWithoutGoodReason() {
+		return withoutGoodReason;
 	}
 }

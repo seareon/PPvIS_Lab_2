@@ -18,7 +18,7 @@ public class StudentsData {
 			String withoutGoodReason) {
 		list.add(new Student(fio, numberGrup, Integer.parseInt(sickness), Integer.parseInt(otherCauses),
 				Integer.parseInt(withoutGoodReason)));
-	}
+	} 
 	
 	public List<Student> allStudents() {
 		return list;
@@ -26,5 +26,13 @@ public class StudentsData {
 	
 	public int getSize() {
 		return list.size();
+	}
+	
+	public void clear() {
+		list.clear();
+	}
+	
+	public void removeAll(List<Student> ls) {
+		list.removeAll(ls);
 	}
 }
