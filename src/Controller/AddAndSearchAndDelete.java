@@ -139,11 +139,7 @@ public class AddAndSearchAndDelete {
 		}
 		checkTheNumberOfPages(deleteD.getFrame().getToolBar());
 	}
-	
-/*	public void addStudent(String fio, String numberGrup, int sickness, int otherCauses, int withoutGoodReason) {
-		sd.addStudent(fio, numberGrup, sickness, otherCauses, withoutGoodReason);
-	}		*/
-	//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! Выбрать что-то одно???
+
 	public void addStudent(String fio, String numberGrup, String sickness, String otherCauses, 
 			String withoutGoodReason) {
 		sd.addStudent(fio, numberGrup, Integer.parseInt(sickness), Integer.parseInt(otherCauses),

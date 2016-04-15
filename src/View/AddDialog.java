@@ -65,19 +65,7 @@ public class AddDialog extends DialogTemplate {
 	public String getWithoutGoodReason() {
 		return withoutGoodReason.getText();
 	}
-	
-/*	public void setSickness(String str) {
-		sickness.setText(str);
-	}
-	
-	public void setOtherCauses(String str) {
-		otherCauses.setText(str);
-	}
-	
-	public void setWithoutGoodReason(String str) {
-		withoutGoodReason.setText(str);
-	}*/
-	
+
 	public JTextField getTextFieldSickness() {
 		return sickness;
 	}

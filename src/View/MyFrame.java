@@ -144,7 +144,7 @@ public class MyFrame extends JFrame {
 		
 		jtb.add(makeButton("open.png", new ActionListener() {
 			@Override
-			public void actionPerformed(ActionEvent arg0) {		// функционал вынести в контроллер
+			public void actionPerformed(ActionEvent arg0) {		
 				// TODO Auto-generated method stub
 				String str = mcf.choosFile("Open");
 				fo.openFile(str);

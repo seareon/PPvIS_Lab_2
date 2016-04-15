@@ -28,19 +28,11 @@ public class DialogTemplate extends JDialog {
 	public String getFio() {
 		return fio.getText();
 	}
-	
-/*	public void setFio(String str) {
-		fio.setText(str);
-	}*/
-	
+
 	public String getNumberGrup() {
 		return numberGrup.getText();
 	}
-	
-/*	public void setNumberGrup(String str) {
-		numberGrup.setText(str);
-	}*/
-	
+
 	public MyFrame getFrame() {
 		return frame;
 	}
